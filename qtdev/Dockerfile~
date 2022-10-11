@@ -1,0 +1,21 @@
+FROM ubuntu:21.04.1
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN sed -i -e 's/archive.ubuntu.com/mirrors.bfsu.edu.cn/' /etc/apt/sources.list && sed -i -e 's/security.ubuntu.com/mirrors.bfsu.edu.cn/' /etc/apt/sources.list
+
+RUN apt update -y && \
+    apt install -y --no-install-recommends \
+    build-essential ccls clang-tidy clazy cppcheck\
+    gdb strace valgrind \
+    cmake git \
+    xterm w3m links lynx \
+    unifont fonts-unifont \
+    qtcreator \
+    qtcreator-data \
+    qtcreator-doc \
+    qt5-* \
+    qt6-* \
+    && \
+    apt autoremove -y && \
+    apt clean -y
